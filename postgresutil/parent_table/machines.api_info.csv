@@ -1,0 +1,6 @@
+column,type,constraints,default,not_null,primary_key,comment
+machine_id,VARCHAR(64),,Nothing,1,1,
+api_adress,VARCHAR(2083),,https://localhost,1,0,
+api_port,INTEGER,CHECK (api_port BETWEEN 1 AND 65535),8080,1,0,
+api_user,VARCHAR(255),,Nothing,1,0,
+api_password,VARCHAR(255),,Nothing,1,0,

@@ -1,0 +1,5 @@
+column,type,constraints,default,not_null,primary_key
+process_name,VARCHAR(255),,0,1,1
+pid,INTEGER,,0,1,1
+datetime,TIMESTAMP,,2000-1-1 0:0:0,1,1
+result,JSONB,,,0,0
