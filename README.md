@@ -1,5 +1,5 @@
 # postgresutil  
-簡単にお試しデータベース構築、操作
+PostgreSQLの低級操作練習
 
 # ClassTree
 Psql  
@@ -26,4 +26,5 @@ Controller(info).create_schema().run()
 
 ## Reader
 info = ConnectingInformation(ip, port, user, password)  
-Controller(info).get_data("query").run()# psqlutil
+Controller(info).get_data("query").run()
+# psqlutil
