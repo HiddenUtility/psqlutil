@@ -41,6 +41,7 @@ class Psql():
     @staticmethod
     def _get_where(where: dict) -> str:
         if len(where) == 0: return ""
+        ...
     
     def _return(self,*querys:str) -> Psql:
         if len(querys)==0:return self

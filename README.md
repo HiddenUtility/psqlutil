@@ -22,17 +22,25 @@ ConnectingInformation
 ```
 # Using
 ## Creator
-```creator.py
+```test_creator.py
 from psqlutil.creator import Creator
 info = ConnectingInformation(ip, port, user, password)
 query = "CREATE SCHEMA test"
 Creator(info).set_free_query(query).commit()
 ```
-## DataReader
-```reader.py
+## Editor
+```test_Editor.py
+from psqlutil.editor import Editor
+info = ConnectingInformation(ip, port, user, password)  
+query = "UPDATE FROM test ..."
+rows, colnames = Editor(info).set_free_query(query).commit()
+```
+
+## Reader
+```test_reader.py
 from psqlutil.reader import Reader
 info = ConnectingInformation(ip, port, user, password)  
-
+query = "SELECT * FROM test"
 rows, colnames = Reader(info).set_free_query(query).get_df()
 ```
 
