@@ -2,7 +2,8 @@
 PostgreSQLの低級操作練習
 
 # ClassTree
-```Psql  
+```  
+Psql
 |-Creator  
 |    |-Schema  
 |    |-Table  
@@ -14,20 +15,24 @@ PostgreSQLの低級操作練習
 |    |    |-Remover  
 |    |    |-Inserter  
 |-Reader  
-|    |-DataReader  
+|    |-DataBaseReader  
 |    |-Exists  
 ConnectingInformation  
-Controller  
+|-DataBaseBuilder  
 ```
 # Using
 ## Creator
 ```creator.py
-info = ConnectingInformation(ip, port, user, password)  
-Controller(info).create_schema().run()
+from psqlutil.creator import Creator
+info = ConnectingInformation(ip, port, user, password)
+query = "CREATE SCHEMA test"
+Creator(info).set_free_query(query).commit()
 ```
-## Reader
+## DataReader
 ```reader.py
+from psqlutil.reader import Reader
 info = ConnectingInformation(ip, port, user, password)  
-Controller(info).get_data("query").run()
+
+rows, colnames = Reader(info).set_free_query(query).get_df()
 ```
 

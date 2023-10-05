@@ -7,15 +7,14 @@ Created on Mon Jun 19 22:50:37 2023
 
 from __future__ import annotations
 
-from postgresutil.editor import Editor
-from PostgresController.User import User
+from psqlutil.editor import Editor
+
 
 
 class InsertingData(Editor):
     #//Field
     querys: list[str] 
-    def __init__(self, user: User):
-        super().__init__(user)
+
         
     def set_query(self,table_name: str, datas: dict)->InsertingData:
         

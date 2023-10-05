@@ -4,19 +4,19 @@ Created on Fri Sep  1 18:13:50 2023
 
 @author: nanik
 """
-
-from postgresutil.reader import Reader
+from __future__ import annotations
+from psqlutil.reader import Reader
 
 import psycopg2
 import pandas as pd
 
-class Reader(Reader):
+class DataBaseReader(Reader):
     querys: list[str] 
     
     def set_query(self, table_name: str,
                   columns: list[str] = None,
                   wheres: dict[str:str] = None
-                  ) -> Reader:
+                  ) -> DataBaseReader:
         """
         
 
@@ -42,26 +42,8 @@ class Reader(Reader):
         return self._return(query)
         
 
-    def read(self) -> (list[list[str]],list[str]):
-        # connect to PostgreSQL and create table
-        conn = psycopg2.connect(
-            host=self.host, 
-            port=self.port, 
-            user=self.username, 
-            password=self.password, 
-            database=self.database
-        )
-        cur = conn.cursor()
-        for query in self.querys: cur.execute(query)
-        rows = cur.fetchall()
-        colnames = [col.name for col in cur.description]
-        # close connection
-        cur.close()
-        conn.close()
-        self.querys = []
-        return rows, colnames
     
-    def get_dataframe(self, table_name: str, 
+    def get_df(self, table_name: str, 
                   values: dict[str:str] = None,
                   columns: list[str] = None) -> pd.DataFrame:
         new = self.set_query(table_name, values, columns)

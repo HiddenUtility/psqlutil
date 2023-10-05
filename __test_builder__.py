@@ -31,7 +31,7 @@ if __name__ == "__main__":
     DROP ROLE Taro;
     
     """
-    info = ConnectingInfromation(database="test",password="password%")
+    info = ConnectingInfromation(database="test",password="password")
     builder = DataBaseBuilder(info)
     
     builder.create_schema()

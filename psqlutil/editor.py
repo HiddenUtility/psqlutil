@@ -12,7 +12,20 @@ from psqlutil.creator import Creator
 
 class Editor(Creator):
     #//Field
-    querys: list[str] 
+    querys: list[str]
+    #@orverride
+    def __add__(self,obj: Editor) -> Editor:
+        if not isinstance(obj, Editor): raise TypeError()
+        self.querys += obj.querys
+        return Editor(self.info ,self.querys)
+    #@orverride
+    def set_free_query(self, *querys: str) -> Editor:
+        for query in querys:
+            if not isinstance(query, str): raise TypeError()
+            if not self._in_query(query, "DELETE"): raise SyntaxError(f"{query}は使用できません。")
+            if not self._in_query(query, "UPDATE"): raise SyntaxError(f"{query}は使用できません。")
+            if not self._in_query(query, "INSERT"): raise SyntaxError(f"{query}は使用できません。")
+        return self._return(*querys)
     
     def delete_duplicate(self,table_name, *columns: list[str]) -> Editor:
         if len(columns) == 0:return self

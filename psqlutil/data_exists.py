@@ -7,7 +7,7 @@ Created on Mon Jun 19 22:36:39 2023
 
 from __future__ import annotations
 import psycopg2
-from postgresutil.reader import Reader
+from psqlutil.reader import Reader
 
 class DataExists(Reader):
     #//Field
@@ -32,11 +32,11 @@ class DataExists(Reader):
     def _read(self) -> None:
         # connect to PostgreSQL and create table
         conn = psycopg2.connect(
-            host=self.host, 
-            port=self.port, 
-            user=self.username, 
-            password=self.password, 
-            database=self.database
+            host=self._info.host, 
+            port=self._info.port, 
+            user=self._info.username, 
+            password=self._info.password, 
+            database=self._info.database
         )
         cur = conn.cursor()
         for query in self.querys: cur.execute(query)
