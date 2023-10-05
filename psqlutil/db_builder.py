@@ -5,10 +5,10 @@ Created on Fri Sep  1 17:52:15 2023
 @author: nanik
 """
 
-from postgresutil.conn_info import ConnectingInfromation
-from postgresutil.schema_creator import SchemaCreator
-from postgresutil.table_creator import TableCreator
-from postgresutil.role_creator import RoleCreator
+from psqlutil.conn_info import ConnectingInfromation
+from psqlutil.schema_creator import SchemaCreator
+from psqlutil.table_creator import TableCreator
+from psqlutil.role_creator import RoleCreator
 
 class DataBaseBuilder:
     def __init__(self, info: ConnectingInfromation):

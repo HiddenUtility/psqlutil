@@ -6,7 +6,7 @@ Created on Wed Jun  7 21:50:41 2023
 """
 
 from __future__ import annotations
-from postgresutil.creator import Creator
+from psqlutil.creator import Creator
 
 
 class AuthorityGiver(Creator):

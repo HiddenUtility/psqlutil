@@ -5,17 +5,17 @@ Created on Mon Jun  5 22:41:56 2023
 @author: iwill
 """
 
-from postgresutil.dummiy_dictionary import DummiyDictionary
+from psqlutil.dummiy_dictionary import DummiyDictionary
 
-from postgresutil.conn_info import ConnectingInfromation
-from postgresutil.db_builder import DataBaseBuilder
-from postgresutil.schema_creator import SchemaCreator
-from postgresutil.table_creator import TableCreator
-from postgresutil.reader import Reader
-from postgresutil.writer import Writer
-from postgresutil.role_creator import RoleCreator
-from postgresutil.authority_giver import AuthorityGiver
-from postgresutil.remover import Remover
+from psqlutil.conn_info import ConnectingInfromation
+from psqlutil.db_builder import DataBaseBuilder
+from psqlutil.schema_creator import SchemaCreator
+from psqlutil.table_creator import TableCreator
+from psqlutil.reader import Reader
+from psqlutil.writer import Writer
+from psqlutil.role_creator import RoleCreator
+from psqlutil.authority_giver import AuthorityGiver
+from psqlutil.remover import Remover
 
 
 
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     DROP ROLE Taro;
     
     """
-    info = ConnectingInfromation(database="test")
+    info = ConnectingInfromation(database="test",password="password%")
     builder = DataBaseBuilder(info)
     
     builder.create_schema()

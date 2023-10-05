@@ -7,7 +7,7 @@ Created on Mon Jun  5 22:31:33 2023
 
 from __future__ import annotations
 
-from postgresutil.editor import Editor
+from psqlutil.editor import Editor
 
 
 class Writer(Editor):

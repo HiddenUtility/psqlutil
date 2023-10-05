@@ -13,8 +13,8 @@ from pathlib import Path
 import pandas as pd
 
 
-from postgresutil.creator import Creator
-from postgresutil.schema_creator import SchemaCreator
+from psqlutil.creator import Creator
+from psqlutil.schema_creator import SchemaCreator
 
 class TableCreator(Creator):
     DIRNAME_TABLE: Final = SchemaCreator.DIRNAME_TABLE

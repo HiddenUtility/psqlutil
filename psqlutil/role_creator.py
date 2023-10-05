@@ -6,7 +6,7 @@ Created on Wed Jun  7 21:48:33 2023
 """
 
 from __future__ import annotations
-from postgresutil.creator import Creator
+from psqlutil.creator import Creator
 import pandas as pd
 from pathlib import Path
 

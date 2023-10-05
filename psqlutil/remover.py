@@ -8,8 +8,8 @@ Created on Mon Jun  5 22:31:48 2023
 from __future__ import annotations
 from datetime import datetime
 
-from postgresutil.editor import Editor
-from postgresutil.conn_info import ConnectingInfromation
+from psqlutil.editor import Editor
+from psqlutil.conn_info import ConnectingInfromation
 
 class Remover(Editor):
     #//Field

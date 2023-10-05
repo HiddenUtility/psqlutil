@@ -4,11 +4,11 @@ Created on Mon Jun  5 22:34:15 2023
 
 @author: iwill
 """
-
+from __future__ import annotations
 import psycopg2
 import abc
 
-from postgresutil.psql import Psql
+from psqlutil.psql import Psql
 
 class ICreator(Psql):
     @abc.abstractmethod
@@ -18,8 +18,8 @@ class ICreator(Psql):
 class Creator(ICreator):
 
     
-    def __add__(self,obj):
-        if not isinstance(obj, Creator): raise TypeError
+    def __add__(self,obj: Creator):
+        if not isinstance(obj, Creator): raise TypeError()
         self.querys += obj.querys
         return self
 
@@ -47,5 +47,8 @@ class Creator(ICreator):
         finally:
             cur.close()
             conn.close()
+            
+    def set_free_query(self, *querys: str) -> Creator:
+        return self._return(*querys)
 
         

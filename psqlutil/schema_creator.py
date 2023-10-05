@@ -8,14 +8,14 @@ Created on Mon Jun  5 22:35:41 2023
 from __future__ import annotations
 from typing import Final
 
-from copy import copy
+
 from pathlib import Path
 
-from postgresutil.creator import Creator
-from postgresutil.conn_info import ConnectingInfromation
+from psqlutil.creator import Creator
+
 
 class SchemaCreator(Creator):
-    DIRNAME_TABLE: Final = "postgresutil/parent_table"
+    DIRNAME_TABLE: Final = "psqlutil/parent_table"
     
     #//Field
     querys: list[str] 
