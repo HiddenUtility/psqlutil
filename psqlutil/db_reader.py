@@ -7,46 +7,77 @@ Created on Fri Sep  1 18:13:50 2023
 from __future__ import annotations
 from psqlutil.reader import Reader
 
-import psycopg2
-import pandas as pd
+from psqlutil.conn_info import ConnectingInfromation
+from pandas import DataFrame
 
 class DataBaseReader(Reader):
+    #//Field
+    _info: ConnectingInfromation
     querys: list[str] 
     
-    def set_query(self, table_name: str,
-                  columns: list[str] = None,
-                  wheres: dict[str:str] = None
+    def __get_query(self, table_name: str,
+                  columns: list[str] = [],
+                  wheres: dict[str:str] = {}
                   ) -> DataBaseReader:
+
+        columns_query = self._get_column_query(columns)
+        where = self._get_where_query(wheres)
+        return f"SELECT {columns_query} FROM {table_name} {where};"
+
+        
+    def read(self,table_name: str,
+            columns: list[str] = {},
+            wheres: dict[str:str] = {},
+            ) -> tuple[list[list[str]], list[str]]:
         """
         
 
         Parameters
         ----------
         table_name : str
-            Target Talbe name
-        values : dict[str:str], optional
-            検索したい値を辞書で指定する. The default is None.
+            Target Talbe name.
         columns : list[str], optional
-            得たい列名指定があれば指定する. The default is None.
+            列名指定があれば指定する. The default is {}.
+        wheres : dict[str:str], optional
+            検索したい値を辞書で指定する.. The default is {}.
+         : TYPE
+            DESCRIPTION.
 
         Returns
         -------
-        Reader
+        (tuple[list[list[str]], list[str]])
             DESCRIPTION.
 
         """
-        columns_query = "*" if columns is None else ", ".join(columns)
-        where = "" if wheres is None else " where " + " AND ".join([ f"{key} = '{wheres[key]}'" for key in wheres])
-        query = f"select {columns_query} from {table_name} {where};"
+        query = self.__get_query(table_name, wheres=wheres, columns=columns)
+        rows,columns = Reader(self._info).set_free_query(query).read()
         
-        return self._return(query)
+        return rows,columns
+    
+    def get_df(self, table_name: str,
+               columns: list[str] = {},
+               wheres: dict[str:str] = {},
+               ) -> DataFrame:
+        """
         
 
-    
-    def get_df(self, table_name: str, 
-                  values: dict[str:str] = None,
-                  columns: list[str] = None) -> pd.DataFrame:
-        new = self.set_query(table_name, values, columns)
-        rows,columns = new.read()
-        if len(rows) == 0:return pd.DataFrame()
-        return pd.DataFrame(rows, columns=columns)
+        Parameters
+        ----------
+        table_name : str
+            Target Talbe name.
+        columns : list[str], optional
+            列名指定があれば指定する. The default is {}.
+        wheres : dict[str:str], optional
+            検索したい値を辞書で指定する.. The default is {}.
+         : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        DataFrame
+            DESCRIPTION.
+
+        """
+        rows,columns = self.read(table_name, wheres=wheres, columns=columns)
+        if len(rows) == 0:return DataFrame()
+        return DataFrame(rows, columns=columns)

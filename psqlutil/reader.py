@@ -8,8 +8,13 @@ Created on Fri Oct  6 05:27:39 2023
 from __future__ import annotations
 from psqlutil.psql import Psql
 import psycopg2
+from pandas import DataFrame
+from psqlutil.conn_info import ConnectingInfromation
 
 class Reader(Psql):
+    #//Field
+    _info: ConnectingInfromation
+    querys: list[str] 
     #@orverride
     def __add__(self,obj: Reader) -> Reader:
         if not isinstance(obj, Reader): raise TypeError()
@@ -22,7 +27,7 @@ class Reader(Psql):
             if not self._in_query(query, "SELECT"): raise SyntaxError(f"{query}は使用できません。")
         return self._return(*querys)
     
-    def read(self) -> (list[list[str]],list[str]):
+    def read(self) -> tuple[list[list[str]], list[str]]:
         if len(self.querys) == 0: raise Exception("queryがセットされていません。")
         # connect to PostgreSQL and create table
         conn = psycopg2.connect(
@@ -42,3 +47,8 @@ class Reader(Psql):
         conn.close()
         self.querys = []
         return rows, colnames
+    
+    def get_df(self) -> DataFrame:
+        rows,columns = self.read()
+        if len(rows) == 0:return DataFrame()
+        return DataFrame(rows, columns=columns)

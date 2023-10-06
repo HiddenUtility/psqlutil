@@ -27,7 +27,7 @@ class Editor(Creator):
             if not self._in_query(query, "INSERT"): raise SyntaxError(f"{query}は使用できません。")
         return self._return(*querys)
     
-    def delete_duplicate(self,table_name, *columns: list[str]) -> Editor:
+    def delete_duplicate(self,table_name, *columns: str) -> Editor:
         if len(columns) == 0:return self
         key = ", ".join([f"{column}" for column in columns])
         andQuery = "WHERE "  + " AND ".join(["t2.{column} = t1.{column}" for column in columns])

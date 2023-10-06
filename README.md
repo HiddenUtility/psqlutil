@@ -32,7 +32,7 @@ Creator(info).set_free_query(query).commit()
 ```test_Editor.py
 from psqlutil.editor import Editor
 info = ConnectingInformation(ip, port, user, password)  
-query = "UPDATE FROM test ..."
+query = "UPDATE test SET id = '123456'"
 rows, colnames = Editor(info).set_free_query(query).commit()
 ```
 

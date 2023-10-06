@@ -11,6 +11,7 @@ import re
 
 class Psql():
     #//Field
+    _info: ConnectingInfromation
     querys: list[str] 
     def __init__(self, info: ConnectingInfromation=None, querys: list[str] = None):
         if info is None:
@@ -37,11 +38,34 @@ class Psql():
         pattern = re.compile(re.escape(key), re.IGNORECASE)
         match_ = pattern.search(query)
         return match_ is not None
-
+    
     @staticmethod
-    def _get_where(where: dict) -> str:
+    def _get_column_query(columns: list[str]) -> str:
+        if not isinstance(columns, list): raise TypeError("columns = {columns} is NOT list")
+        if len(columns) == 0: return "*"
+        return ", ".join(columns)
+    @staticmethod
+    def _get_where_query(where: dict) -> str:
+        if not isinstance(where, dict): raise TypeError("where = {where} is NOT dictionary")
         if len(where) == 0: return ""
-        ...
+        wheres = [f" {k} = '{v}'" for k, v in where.items()]
+        return f"WHERE {' AND'.join(wheres)}"
+    @staticmethod
+    def _get_set_query(values: dict) -> str:
+        if not isinstance(values, dict): raise TypeError("values = {values} is NOT dictionary")
+        if len(values) == 0: return ""
+        values = [f" {k} = '{v}'" for k, v in values.items()]
+        return f"SET {', '.join(values)}"
+    @staticmethod
+    def _get_values_query(values: dict) -> str:
+        if not isinstance(values, dict): raise TypeError("values = {values} is NOT dictionary")
+        if len(values) == 0: return ""
+        columns = []
+        vs = []
+        for column, v in values.items():
+            columns.append(column)
+            vs.append(f"'{v}'")
+        return f"{', '.join(columns)} VALUES ({', '.join(vs)})"
     
     def _return(self,*querys:str) -> Psql:
         if len(querys)==0:return self
