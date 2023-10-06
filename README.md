@@ -18,7 +18,7 @@ Psql
 |    |-DataBaseReader  
 |    |-Exists  
 ConnectingInformation  
-|-DataBaseBuilder  
+DataBaseBuilder  
 ```
 # Using
 ## Creator
