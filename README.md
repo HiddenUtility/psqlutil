@@ -33,7 +33,7 @@ Creator(info).set_free_query(query).commit()
 from psqlutil.editor import Editor
 info = ConnectingInformation(ip, port, user, password)  
 query = "UPDATE test SET id = '123456'"
-rows, colnames = Editor(info).set_free_query(query).commit()
+Editor(info).set_free_query(query).commit()
 ```
 
 ## Reader
@@ -41,6 +41,6 @@ rows, colnames = Editor(info).set_free_query(query).commit()
 from psqlutil.reader import Reader
 info = ConnectingInformation(ip, port, user, password)  
 query = "SELECT * FROM test"
-rows, colnames = Reader(info).set_free_query(query).get_df()
+df: DataFrame = Reader(info).set_free_query(query).get_df()
 ```
 
