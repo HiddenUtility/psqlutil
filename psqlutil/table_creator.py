@@ -27,7 +27,7 @@ class TableCreator(Creator):
     #//Field
     querys: list[str] 
     
-    def _get_table_create_query(self,
+    def __get_table_create_query(self,
                                table_name:str,
                                df: pd.DataFrame) -> str:
         querys =[]
@@ -54,19 +54,22 @@ class TableCreator(Creator):
             table_name,", ".join(querys), ", ".join(primary_keys))
         return query
     
-    def _get_query_from_csv(self, filepath: Path) -> str:
+    def __get_query_from_csv(self, filepath: Path) -> str:
         try:
             df = pd.read_csv(filepath, engine="python", encoding="cp932", dtype=str).fillna("")
         except Exception as ex:
             raise Exception(f"{filepath} is Not reading. {ex}")
         table_name = filepath.stem
-        return self._get_table_create_query(table_name, df)
+        return self.__get_table_create_query(table_name, df)
     
-    def _get_querys_from_csvfiles(self) -> list[str]:
-        filepaths = [f for f in Path(self.DIRNAME_TABLE).glob("*.csv") if f.is_file()]
+    def __get_querys_from_csvfiles(self) -> list[str]:
+        filepaths = self.__get_filepahs_csv()
         if len(filepaths) == 0 : raise FileNotFoundError(f"{self.DIRNAME_TABLE}内にファイルがありません。") 
-        return list(map(self._get_query_from_csv, filepaths))
-        
+        return list(map(self.__get_query_from_csv, filepaths))
+    
+    def __get_filepahs_csv(self) -> list[Path]:
+        return [f for f in Path(self.DIRNAME_TABLE).glob("*.csv") if f.is_file()]
+    
     def set_query(self,
                   table_name: str,
                   columns:list[str],
@@ -110,7 +113,15 @@ class TableCreator(Creator):
         return self._return(query)
 
     def set_querys_from_csv(self) -> TableCreator:
-        querys = self._get_querys_from_csvfiles()
+        querys = self.__get_querys_from_csvfiles()
         return self._return(*querys)
 
+    def create_parent_from_csv(self):
+        filepaths = self.__get_filepahs_csv()
+        for filepath in filepaths:
+            print(filepath.name)
+            query = self.__get_query_from_csv(filepath)
+            Creator(self._info, [query]).commit()
+            
+            
         

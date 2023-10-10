@@ -16,14 +16,14 @@ class DataBaseBuilder:
         if not info.can_connect():
             raise Exception(f"接続できません。\n{info}")
         self.schema_creator = SchemaCreator(info)
-        self.table_ceator = TableCreator(info)
-        self.role_ceator = RoleCreator(info)
+        self.table_creator = TableCreator(info)
+        self.role_creator = RoleCreator(info)
     
     def create_schema(self):
         self.schema_creator.set_schemas_from_csv().commit()
 
     def create_table(self):
-        self.table_ceator.set_querys_from_csv().commit()
+        self.table_creator.create_parent_from_csv()
 
     def create_role(self):
-        self.table_ceator.set_querys_from_csv().commit()
+        self.table_creator.set_querys_from_csv().commit()
