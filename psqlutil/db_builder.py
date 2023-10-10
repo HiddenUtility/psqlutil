@@ -9,6 +9,7 @@ from psqlutil.conn_info import ConnectingInfromation
 from psqlutil.schema_creator import SchemaCreator
 from psqlutil.table_creator import TableCreator
 from psqlutil.role_creator import RoleCreator
+from psqlutil.inserting_data import InsertingData
 
 class DataBaseBuilder:
     def __init__(self, info: ConnectingInfromation):
@@ -18,6 +19,7 @@ class DataBaseBuilder:
         self.schema_creator = SchemaCreator(info)
         self.table_creator = TableCreator(info)
         self.role_creator = RoleCreator(info)
+        self.inserting = InsertingData(info)
     
     def create_schema(self):
         self.schema_creator.set_schemas_from_csv().commit()
@@ -30,3 +32,7 @@ class DataBaseBuilder:
 
     def create_role(self):
         self.role_creator.set_querys_from_csv().commit()
+        
+    def insert_ini_data(self):
+        self.inserting.insert_data_from_csv()
+        
