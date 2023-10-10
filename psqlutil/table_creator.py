@@ -15,6 +15,7 @@ import pandas as pd
 
 from psqlutil.creator import Creator
 from psqlutil.schema_creator import SchemaCreator
+from psqlutil.conn_info import ConnectingInfromation
 
 class TableCreator(Creator):
     DIRNAME_TABLE: Final = SchemaCreator.DIRNAME_TABLE
@@ -24,7 +25,13 @@ class TableCreator(Creator):
     COL_CONST = "constraints"
     COL_DEFAULT = "default"
     COL_NOT_NULL = "not_null"
+    
+    CHILD_TABLE_PATH = "psqlutil/child_table/child_table.csv"
+    COL_SCHEMA = "schema"
+    COL_PARENT = "parent"
+    COL_CHILD = "child"
     #//Field
+    _info: ConnectingInfromation
     querys: list[str] 
     
     def __get_table_create_query(self,
@@ -122,6 +129,25 @@ class TableCreator(Creator):
             print(filepath.name)
             query = self.__get_query_from_csv(filepath)
             Creator(self._info, [query]).commit()
+    
+        
+    
+    def create_child_table_from_csv(self) -> None:
+        filepath = Path(self.CHILD_TABLE_PATH)
+        try:
+            df = pd.read_csv(filepath, engine="python", encoding="cp932", dtype=str).fillna("")
+        except Exception as ex:
+            raise Exception(f"{filepath} is Not reading. {ex}")
+        querys = []
+        for _, row in df.iterrows():
+            schema = row[self.COL_SCHEMA]
+            parent = row[self.COL_PARENT]
+            child = row[self.COL_CHILD]
+            querys.append(
+                f"CREATE TABLE IF NOT EXISTS {schema}.{child} () INHERITS ({schema}.{parent});"
+                )
+        Creator(self._info, querys).commit()
+        
             
             
         

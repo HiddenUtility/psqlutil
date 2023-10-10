@@ -1,6 +1,0 @@
-column,type,constraints,default,not_null,primary_key,comment
-machine_id,VARCHAR(64),,Nothing,1,1,
-db_ip,VARCHAR(15),,localhost,1,0,
-db_port,INTEGER,CHECK (db_port BETWEEN 1 AND 65535),5432,1,0,
-db_user,VARCHAR(255),,Nothing,1,0,
-db_password,VARCHAR(255),,Nothing,1,0,

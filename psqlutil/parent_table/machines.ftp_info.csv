@@ -1,5 +1,0 @@
-column,type,constraints,default,not_null,primary_key,comment
-machine_id,VARCHAR(64),,Nothing,1,1,
-ftp_ip,VARCHAR(255),,localhost,1,0,
-ftp_port,INTEGER,CHECK (ftp_port BETWEEN 1 AND 65535),21,1,0,
-ftp_password,VARCHAR(255),,Nothing,1,0,
