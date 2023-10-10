@@ -46,7 +46,7 @@ class TableCreator(Creator):
                 query = "{} {} {}".format(col, type_name, constraints)
                 
             querys.append(query)
-            if bool(primary):
+            if int(primary) == 1:
                 primary_keys.append(col)
         
         if len(primary_keys) == 0: raise Exception("primary_keyがありません。")
