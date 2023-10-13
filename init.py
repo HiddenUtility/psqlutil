@@ -10,7 +10,7 @@ from glob import glob
 from shutil import rmtree
 
 
-def main():
+def init():
     cd = str(Path.cwd() / "**/__pycache__")
     dirpaths = [Path(d) for d in glob(cd, recursive=True)]
     for d in dirpaths:
@@ -18,6 +18,6 @@ def main():
         print("Delete !!",d)
     
 if __name__ == "__main__":
-    main()
+    init()
     
     

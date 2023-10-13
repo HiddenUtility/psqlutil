@@ -5,20 +5,12 @@ Created on Mon Jun  5 22:41:56 2023
 @author: iwill
 """
 
-from pathlib import Path
-from glob import glob
-from shutil import rmtree
-
-from psqlutil.conn_info import ConnectingInfromation
-from psqlutil.db_builder import DataBaseBuilder
 
 
-def init():
-    cd = str(Path.cwd() / "**/__pycache__")
-    dirpaths = [Path(d) for d in glob(cd, recursive=True)]
-    for d in dirpaths:
-        if d.is_dir(): rmtree(d)
-        print("Delete !!",d)
+from psqlutil import ConnectingInfromation
+from psqlutil import DataBaseBuilder
+
+
 
 if __name__ == "__main__":
     """
@@ -39,8 +31,8 @@ if __name__ == "__main__":
     builder.create_role()
     builder.insert_ini_data()
     
-    
-    init()
+    import init
+    init.init()
     
 
 

@@ -1,0 +1,8 @@
+column,type,constraints,default,not_null,primary_key,comment
+machine_id,VARCHAR(64),,Nothing,1,1,
+line,VARCHAR(64),,Nothing,1,0,
+parts,VARCHAR(64),,Nothing,1,0,
+op,VARCHAR(64),,Nothing,1,0,
+transfer_data_path,VARCHAR(255),,Nothing,1,0,
+transfer_setting_path,VARCHAR(255),,Nothing,1,0,
+transfer_log_path,VARCHAR(255),,Nothing,1,0,

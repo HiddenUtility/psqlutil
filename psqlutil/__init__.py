@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Oct  6 04:55:27 2023
+Created on Fri Oct 13 18:13:59 2023
 
 @author: nanik
+"""
 
 from psqlutil.authority_giver import AuthorityGiver
 from psqlutil.conn_info import ConnectingInfromation
@@ -20,10 +21,4 @@ from psqlutil.table_creator import TableCreator
 from psqlutil.updater import Updater
 from psqlutil.writer import Writer
 from psqlutil.reader import Reader
-"""
-from psqlutil import ConnectingInfromation
 
-
-if __name__ == "__main__":
-    import init
-    init.init()
