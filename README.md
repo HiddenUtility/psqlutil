@@ -39,7 +39,7 @@ Creator(info).set_free_query(query).commit()
 from psqlutil import ConnectingInformation, Editor, InsertIntoQureryCreator
 info = ConnectingInformation(ip, port, user, password)  
 data = dict(id="1234")
-query:str = InsertIntoQureryCreator("table_name).set_data(data).query
+query:str = InsertIntoQureryCreator("table_name").set_data(data).query
 Editor(info).set_free_query(query).commit()
 ```
 
@@ -48,7 +48,7 @@ Editor(info).set_free_query(query).commit()
 from psqlutil import ConnectingInformation, Reader, SelectQureryCreator
 info = ConnectingInformation(ip, port, user, password) 
 where = dict(id="1234")
-query:str = SelectQureryCreator("table_name).set_where(where).query
+query:str = SelectQureryCreator("table_name").set_where(where).query
 df: DataFrame = Reader(info).set_free_query(query).get_df()
 ```
 
