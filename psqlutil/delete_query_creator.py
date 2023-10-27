@@ -21,7 +21,7 @@ class DeleteQureryCreator(QueryCreator, TableQueryCreator):
         return self.query
     
     def get_query(self, where: dict[str,str]={}) -> str:
-        return f"DELETE FORM {self.__table_name} {WhereQureryCreator(where)}"
+        return f"DELETE FROM {self.__table_name} {WhereQureryCreator(where)}"
     
     def set_where(self, where: dict[str,str]={}) -> DeleteQureryCreator:
         return DeleteQureryCreator(self.__table_name, where)
