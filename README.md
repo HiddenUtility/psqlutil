@@ -16,31 +16,39 @@ Psql
 |    |    |-Inserter  
 |-Reader  
 |    |-DataBaseReader  
-|    |-Exists  
+|    |-Exists
+QueryCreator
+|-TableQueryCreator
+|    |-SelectQureryCreator
+|    |-DeleteQureryCreator
+|    |-UpdateQureryCreator
+|    |-InsertIntoQureryCreator
 ConnectingInformation  
 DataBaseBuilder  
 ```
 # Using
 ## Creator
 ```test_creator.py
-from psqlutil.creator import Creator
+from psqlutil import Creator
 info = ConnectingInformation(ip, port, user, password)
 query = "CREATE SCHEMA test"
 Creator(info).set_free_query(query).commit()
 ```
 ## Editor
 ```test_Editor.py
-from psqlutil.editor import Editor
+from psqlutil import Editor, InsertIntoQureryCreator
 info = ConnectingInformation(ip, port, user, password)  
-query = "UPDATE test SET id = '123456'"
+data = dict(id="1234")
+query:str = InsertIntoQureryCreator("table_name).set_data(data).query
 Editor(info).set_free_query(query).commit()
 ```
 
 ## Reader
 ```test_reader.py
-from psqlutil.reader import Reader
-info = ConnectingInformation(ip, port, user, password)  
-query = "SELECT * FROM test"
+from psqlutil import Reader, SelectQureryCreator
+info = ConnectingInformation(ip, port, user, password) 
+where = dict(id="1234")
+query:str = SelectQureryCreator("table_name).set_where(where).query
 df: DataFrame = Reader(info).set_free_query(query).get_df()
 ```
 
