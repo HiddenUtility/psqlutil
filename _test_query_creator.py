@@ -16,6 +16,7 @@ from querycreator import SelectQureryCreator
 from querycreator import DeleteQureryCreator
 from querycreator import UpdateQureryCreator
 from querycreator import InsertIntoQureryCreator
+from querycreator import WriteQureryCreator
 
 def test_sub_class():
     where: dict = dict(id=1234, name="takeshi")
@@ -54,6 +55,9 @@ if __name__ == "__main__":
     print(str(creator))
     
     creator = InsertIntoQureryCreator(table_name).set_data(data)
+    print(str(creator))
+    
+    creator = WriteQureryCreator(table_name).set_values(value).set_where(where)
     print(str(creator))
     
     init()

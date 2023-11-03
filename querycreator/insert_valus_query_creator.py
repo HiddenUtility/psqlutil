@@ -23,7 +23,7 @@ class InsertValuesQureryCreator(QueryCreator):
             cols.append(k)
             words.append(f"'{v}'")
 
-        return f"({', '.join(cols)}) VALUES ({', '.join(words)})"
+        return f"({', '.join(cols)}) VALUES ({', '.join(words)});"
     
     @property
     def query(self):

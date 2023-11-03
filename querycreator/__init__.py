@@ -13,3 +13,4 @@ from querycreator.select_query_creator import SelectQureryCreator
 from querycreator.delete_query_creator import DeleteQureryCreator
 from querycreator.update_query_creator import UpdateQureryCreator
 from querycreator.insert_into_query_creator import InsertIntoQureryCreator
+from querycreator.write_query_creator import WriteQureryCreator
