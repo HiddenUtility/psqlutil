@@ -5,14 +5,17 @@ Created on Fri Oct 27 13:24:07 2023
 @author: nanik
 """
 
-from psqlutil.where_query_creator import WhereQureryCreator
-from psqlutil.insert_valus_query_creator import InsertValuesQureryCreator
-from psqlutil.set_valus_query_creator import SetValuesQureryCreator
+from init import init
 
-from psqlutil.select_query_creator import SelectQureryCreator
-from psqlutil.delete_query_creator import DeleteQureryCreator
-from psqlutil.update_query_creator import UpdateQureryCreator
-from psqlutil.insert_into_query_creator import InsertIntoQureryCreator
+# //P
+from querycreator.where_query_creator import WhereQureryCreator
+from querycreator.insert_valus_query_creator import InsertValuesQureryCreator
+from querycreator.set_valus_query_creator import SetValuesQureryCreator
+# //Public Classs
+from querycreator import SelectQureryCreator
+from querycreator import DeleteQureryCreator
+from querycreator import UpdateQureryCreator
+from querycreator import InsertIntoQureryCreator
 
 def test_sub_class():
     where: dict = dict(id=1234, name="takeshi")
@@ -32,6 +35,7 @@ def test_sub_class():
 
 
 if __name__ == "__main__":
+    test_sub_class()
     
     table_name = "table_name"
     
@@ -41,13 +45,15 @@ if __name__ == "__main__":
     data = dict(id="1234", pai="3.14")
     
     creator = SelectQureryCreator(table_name).set_columns(columns).set_where(where)
-    print(creator)
+    print(str(creator))
     
     creator = DeleteQureryCreator(table_name).set_where(where)
-    print(creator)
+    print(str(creator))
     
     creator = UpdateQureryCreator(table_name).set_values(value).set_where(where)
-    print(creator)
+    print(str(creator))
     
     creator = InsertIntoQureryCreator(table_name).set_data(data)
-    print(creator)
+    print(str(creator))
+    
+    init()

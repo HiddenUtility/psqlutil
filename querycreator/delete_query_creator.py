@@ -5,9 +5,9 @@ Created on Fri Oct 27 14:15:55 2023
 @author: nanik
 """
 from __future__ import annotations
-from psqlutil.query_creator import QueryCreator
-from psqlutil.table_query_creator import TableQueryCreator
-from psqlutil.where_query_creator import WhereQureryCreator
+from querycreator.query_creator import QueryCreator
+from querycreator.table_query_creator import TableQueryCreator
+from querycreator.where_query_creator import WhereQureryCreator
 
 class DeleteQureryCreator(QueryCreator, TableQueryCreator):
     __table_name: str

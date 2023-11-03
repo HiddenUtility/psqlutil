@@ -5,10 +5,10 @@ Created on Fri Oct 27 14:17:14 2023
 @author: nanik
 """
 from __future__ import annotations
-from psqlutil.query_creator import QueryCreator
-from psqlutil.table_query_creator import TableQueryCreator
-from psqlutil.where_query_creator import WhereQureryCreator
-from psqlutil.insert_valus_query_creator import InsertValuesQureryCreator
+from querycreator.query_creator import QueryCreator
+from querycreator.table_query_creator import TableQueryCreator
+from querycreator.where_query_creator import WhereQureryCreator
+from querycreator.insert_valus_query_creator import InsertValuesQureryCreator
 
 class InsertIntoQureryCreator(QueryCreator, TableQueryCreator):
     __table_name: str

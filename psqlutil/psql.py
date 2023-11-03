@@ -5,9 +5,36 @@ Created on Fri Sep  1 17:49:58 2023
 @author: nanik
 """
 from __future__ import annotations
+from abc import ABCMeta, abstractmethod
 from psqlutil.conn_info import ConnectingInfromation
 from copy import copy
 import re
+
+class Psql(metaclass=ABCMeta):
+    @abstractmethod
+    def set_query():
+        pass
+
+class Creator(Psql):
+    @abstractmethod
+    def set_querys():
+        pass
+    @abstractmethod
+    def commit():
+        pass
+    
+class TableEditor(Psql):
+    @abstractmethod
+    def set_querys():
+        pass
+    @abstractmethod
+    def commit():
+        pass
+
+class Reader(Psql):
+    @abstractmethod
+    def get_df():
+        pass
 
 class Psql():
     #//Field
