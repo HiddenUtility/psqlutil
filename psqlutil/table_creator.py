@@ -1,42 +1,56 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jun  5 22:37:54 2023
-
-@author: iwill
-"""
-
 from __future__ import annotations
-from typing import Final
-
 from pathlib import Path
+from typing import Final
+from pandas import read_csv, DataFrame
 
-import pandas as pd
-
-
-from psqlutil.creator import Creator
-from psqlutil.schema_creator import SchemaCreator
 from psqlutil.connection_information import ConnectioinInfromation
+from psqlutil.psql import Psql
+from psqlutil.committing import Committing
 
-class TableCreator(Creator):
-    DIRNAME_TABLE: Final = SchemaCreator.DIRNAME_TABLE
+class TableCreator(Psql):
+    DIRNAME_TABLE: Final = "psqlutil/parent_table"
     COL_COLUMN = "column"
     COL_PRIMARY_KYE = "primary_key"
     COL_TYPE = "type"
     COL_CONST = "constraints"
     COL_DEFAULT = "default"
     COL_NOT_NULL = "not_null"
-    
     CHILD_TABLE_PATH = "psqlutil/child_table/child_table.csv"
     COL_SCHEMA = "schema"
     COL_PARENT = "parent"
     COL_CHILD = "child"
-    #//Field
-    _info: ConnectioinInfromation
-    querys: list[str] 
+
+    __info: ConnectioinInfromation
+    __querys: list[str] 
+    def __init__(self, info: ConnectioinInfromation=ConnectioinInfromation(), querys: list[str] = []):
+        if not isinstance(info , ConnectioinInfromation): TypeError()
+        if not isinstance(querys , list): TypeError()
+        self.__info = info
+        self.__querys = querys
+
+    # @override
+    def __add__(self,obj: TableCreator) -> TableCreator:
+        if not isinstance(obj, TableCreator): raise TypeError()
+        querys = obj.to_querys() + self.__querys()
+        return TableCreator(self.__info , querys)
+    
+    # @override
+    def set_querys(self,querys :list[str]) -> TableCreator:
+        querys = querys + self.__querys()
+        return TableCreator(self.__info , querys)
+    
+    # @override
+    def to_querys(self):
+        return self.__querys
+
+    # @override
+    def commit(self) -> None:
+        Committing(self.__info, self.__querys).commit()
     
     def __get_table_create_query(self,
                                table_name:str,
-                               df: pd.DataFrame) -> str:
+                               df: DataFrame) -> str:
         querys =[]
         primary_keys = []
         for _, row in df.iterrows():
@@ -63,7 +77,7 @@ class TableCreator(Creator):
     
     def __get_query_from_csv(self, filepath: Path) -> str:
         try:
-            df = pd.read_csv(filepath, engine="python", encoding="cp932", dtype=str).fillna("")
+            df = read_csv(filepath, engine="python", encoding="cp932", dtype=str).fillna("")
         except Exception as ex:
             raise Exception(f"{filepath} is Not reading. {ex}")
         table_name = filepath.stem
@@ -97,7 +111,7 @@ class TableCreator(Creator):
         default_values : list[str]
             列のデフォルト値のリスト.
         not_null : TYPE, optional
-            NOT　NULLを付与する. The default is True.
+            NOT NULLを付与する. The default is True.
         Returns
         -------
         None.
@@ -117,25 +131,20 @@ class TableCreator(Creator):
                                                             ", ".join(primary_keys)
                                                             )
         
-        return self._return(query)
+        return TableCreator(self.__info, [query])
 
-    def set_querys_from_csv(self) -> TableCreator:
-        querys = self.__get_querys_from_csvfiles()
-        return self._return(*querys)
 
-    def create_parent_from_csv(self):
+    def set_parent_from_csv(self) -> TableCreator:
         filepaths = self.__get_filepahs_csv()
         for filepath in filepaths:
             print(filepath.name)
             query = self.__get_query_from_csv(filepath)
-            Creator(self._info, [query]).commit()
+        return TableCreator(self.__info, [query])
     
-        
-    
-    def create_child_table_from_csv(self) -> None:
+    def set_child_table_from_csv(self) -> TableCreator:
         filepath = Path(self.CHILD_TABLE_PATH)
         try:
-            df = pd.read_csv(filepath, engine="python", encoding="cp932", dtype=str).fillna("")
+            df: DataFrame = read_csv(filepath, engine="python", encoding="cp932", dtype=str).fillna("")
         except Exception as ex:
             raise Exception(f"{filepath} is Not reading. {ex}")
         querys = []
@@ -146,7 +155,7 @@ class TableCreator(Creator):
             querys.append(
                 f"CREATE TABLE IF NOT EXISTS {schema}.{child} () INHERITS ({schema}.{parent});"
                 )
-        Creator(self._info, querys).commit()
+        return TableCreator(self.__info, querys)
         
             
             

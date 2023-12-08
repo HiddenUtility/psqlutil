@@ -26,10 +26,10 @@ class DataBaseBuilder:
         self.schema_creator.set_schemas_from_csv().commit()
 
     def create_parent_table(self):
-        self.table_creator.create_parent_from_csv()
+        self.table_creator.set_parent_from_csv().commit()
         
     def create_child_table(self):
-        self.table_creator.create_child_table_from_csv()
+        self.table_creator.set_child_table_from_csv().commit()
 
     def create_role(self):
         self.role_creator.set_querys_from_csv().commit()
