@@ -68,3 +68,4 @@ class Reader(Psql):
         rows, columns = self.read()
         if len(rows) == 0:return DataFrame()
         return DataFrame(rows, columns=columns)
+    
