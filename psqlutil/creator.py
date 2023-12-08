@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jun  5 22:34:15 2023
-
-@author: iwill
-"""
 from __future__ import annotations
 from psqlutil.psql import Psql
 from psqlutil.committing import Committing
