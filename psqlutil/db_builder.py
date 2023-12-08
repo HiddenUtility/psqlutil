@@ -35,5 +35,5 @@ class DataBaseBuilder:
         self.role_creator.set_querys_from_csv().commit()
         
     def insert_ini_data(self):
-        self.inserting.insert_data_from_csv()
+        self.inserting.set_insert_data_from_csv().commit()
         

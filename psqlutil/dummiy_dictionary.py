@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jun 16 14:06:14 2023
-
-@author: nanik
-"""
-
 import string
 import random
-
-
 
 class DummiyDictionary:
     @staticmethod
@@ -39,9 +31,5 @@ class DummiyDictionary:
 
         # 辞書を返す
         return d
-    
-    
-if __name__ == "__main__":
-    print(DummiyDictionary.random_dict())
     
     
