@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 19 22:50:37 2023
-
-@author: iwill
-"""
-
 from __future__ import annotations
 from pathlib import Path
 from pandas import read_csv, DataFrame
 
 from psqlutil.connection_information import ConnectioinInfromation
-from psqlutil.editor import Editor
+from psqlutil.psql import Psql
 from psqlutil.committing import Committing
 
-class InsertingData(Editor):
+class InsertingData(Psql):
     DIRPATH = "psqlutil/data"
     __info: ConnectioinInfromation
     __querys: list[str] 
@@ -48,7 +42,6 @@ class InsertingData(Editor):
         except Exception as ex:
             raise Exception(f"{filepath} is Not reading. {ex}")
         table_name = filepath.stem
-
         return [self.__get_query(table_name, row.to_dict()) for _, row in df.iterrows()]
 
     def __get_filepahs_csv(self) -> list[Path]:
