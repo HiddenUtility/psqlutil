@@ -12,8 +12,9 @@ from psqlutil.role_creator import RoleCreator
 from psqlutil.inserting_data import InsertingData
 
 class DataBaseBuilder:
+    __info: ConnectioinInfromation
     def __init__(self, info: ConnectioinInfromation):
-        self.info = info
+        self.__info = info
         if not info.can_connect():
             raise Exception(f"接続できません。\n{info}")
         self.schema_creator = SchemaCreator(info)
