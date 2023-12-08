@@ -4,13 +4,8 @@ Created on Mon Jun  5 22:41:56 2023
 
 @author: iwill
 """
-
-
-
 from psqlutil import ConnectingInfromation
 from psqlutil import DataBaseBuilder
-
-
 
 if __name__ == "__main__":
     """
@@ -31,10 +26,6 @@ if __name__ == "__main__":
     builder.create_role()
     builder.insert_ini_data()
     
-    import init
-    init.init()
-    
-
 
     
     
