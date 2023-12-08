@@ -8,13 +8,13 @@ Created on Mon Jun 19 22:50:37 2023
 from __future__ import annotations
 from pathlib import Path
 from psqlutil.editor import Editor
-from psqlutil.conn_info import ConnectingInfromation
+from psqlutil.connection_information import ConnectioinInfromation
 from pandas import read_csv, DataFrame
 
 class InsertingData(Editor):
     DIRPATH = "psqlutil/data"
     #//Field
-    _info: ConnectingInfromation
+    _info: ConnectioinInfromation
     querys: list[str] 
 
     def __get_query(self, table_name: str, datas: dict) -> str:

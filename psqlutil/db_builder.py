@@ -5,14 +5,14 @@ Created on Fri Sep  1 17:52:15 2023
 @author: nanik
 """
 
-from psqlutil.conn_info import ConnectingInfromation
+from psqlutil.connection_information import ConnectioinInfromation
 from psqlutil.schema_creator import SchemaCreator
 from psqlutil.table_creator import TableCreator
 from psqlutil.role_creator import RoleCreator
 from psqlutil.inserting_data import InsertingData
 
 class DataBaseBuilder:
-    def __init__(self, info: ConnectingInfromation):
+    def __init__(self, info: ConnectioinInfromation):
         self.info = info
         if not info.can_connect():
             raise Exception(f"接続できません。\n{info}")

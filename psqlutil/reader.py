@@ -9,11 +9,11 @@ from __future__ import annotations
 from psqlutil.psql import Psql
 import psycopg2
 from pandas import DataFrame
-from psqlutil.conn_info import ConnectingInfromation
+from psqlutil.connection_information import ConnectioinInfromation
 
 class Reader(Psql):
     #//Field
-    _info: ConnectingInfromation
+    _info: ConnectioinInfromation
     querys: list[str] 
     #@orverride
     def __add__(self,obj: Reader) -> Reader:

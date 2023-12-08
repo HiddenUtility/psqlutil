@@ -7,7 +7,7 @@ Created on Mon Jun  5 22:31:12 2023
 from __future__ import annotations
 import psycopg2
 
-class ConnectingInfromation:
+class ConnectioinInfromation:
 
     def __init__(self, 
                  host: str="localhost",
@@ -40,8 +40,8 @@ class ConnectingInfromation:
                  port: int=5432, 
                  database: str="postgres", 
                  username: str="postgres",
-                 password: str="passwrod") -> ConnectingInfromation:
-        return ConnectingInfromation(
+                 password: str="passwrod") -> ConnectioinInfromation:
+        return ConnectioinInfromation(
             host,
             port,
             database,

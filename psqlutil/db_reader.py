@@ -7,12 +7,12 @@ Created on Fri Sep  1 18:13:50 2023
 from __future__ import annotations
 from psqlutil.reader import Reader
 
-from psqlutil.conn_info import ConnectingInfromation
+from psqlutil.connection_information import ConnectioinInfromation
 from pandas import DataFrame
 
 class DataBaseReader(Reader):
     #//Field
-    _info: ConnectingInfromation
+    _info: ConnectioinInfromation
     querys: list[str] 
     
     def __get_query(self, table_name: str,

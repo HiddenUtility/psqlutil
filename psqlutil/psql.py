@@ -6,7 +6,7 @@ Created on Fri Sep  1 17:49:58 2023
 """
 from __future__ import annotations
 from abc import ABCMeta, abstractmethod
-from psqlutil.conn_info import ConnectingInfromation
+from psqlutil.connection_information import ConnectioinInfromation
 from copy import copy
 import re
 
@@ -38,12 +38,12 @@ class Reader(Psql):
 
 class Psql():
     #//Field
-    _info: ConnectingInfromation
+    _info: ConnectioinInfromation
     querys: list[str] 
-    def __init__(self, info: ConnectingInfromation=None, querys: list[str] = None):
+    def __init__(self, info: ConnectioinInfromation=None, querys: list[str] = None):
         if info is None:
-            info =  ConnectingInfromation()
-        if not isinstance(info, ConnectingInfromation): raise TypeError("NOT ConnectingInfromation Object")
+            info =  ConnectioinInfromation()
+        if not isinstance(info, ConnectioinInfromation): raise TypeError("NOT ConnectioinInfromation Object")
         if not info.can_connect():raise ConnectionError("SQLに接続できません。")
         self._info = info
         self.querys = [] if querys is None else querys

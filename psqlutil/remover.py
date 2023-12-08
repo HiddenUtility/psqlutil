@@ -9,13 +9,13 @@ from __future__ import annotations
 from datetime import datetime
 
 from psqlutil.editor import Editor
-from psqlutil.conn_info import ConnectingInfromation
+from psqlutil.connection_information import ConnectioinInfromation
 
 class Remover(Editor):
     #//Field
     querys: list[str] 
-    def __init__(self, ConnectingInfromation: ConnectingInfromation):
-        super().__init__(ConnectingInfromation)
+    def __init__(self, ConnectioinInfromation: ConnectioinInfromation):
+        super().__init__(ConnectioinInfromation)
         
     def set_query(self,table_name: str, datas: dict=None)->Remover:
         if datas is None: return self.set_query_table_all_data(table_name)

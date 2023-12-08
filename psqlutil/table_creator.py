@@ -15,7 +15,7 @@ import pandas as pd
 
 from psqlutil.creator import Creator
 from psqlutil.schema_creator import SchemaCreator
-from psqlutil.conn_info import ConnectingInfromation
+from psqlutil.connection_information import ConnectioinInfromation
 
 class TableCreator(Creator):
     DIRNAME_TABLE: Final = SchemaCreator.DIRNAME_TABLE
@@ -31,7 +31,7 @@ class TableCreator(Creator):
     COL_PARENT = "parent"
     COL_CHILD = "child"
     #//Field
-    _info: ConnectingInfromation
+    _info: ConnectioinInfromation
     querys: list[str] 
     
     def __get_table_create_query(self,

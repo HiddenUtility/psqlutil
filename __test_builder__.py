@@ -4,7 +4,7 @@ Created on Mon Jun  5 22:41:56 2023
 
 @author: iwill
 """
-from psqlutil import ConnectingInfromation
+from psqlutil import ConnectioinInfromation
 from psqlutil import DataBaseBuilder
 
 if __name__ == "__main__":
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     DROP ROLE Taro;
     
     """
-    info = ConnectingInfromation(database="test",password="password")
+    info = ConnectioinInfromation(database="test",password="password")
     builder = DataBaseBuilder(info)
     
     builder.create_schema()
