@@ -6,6 +6,7 @@ from pandas import read_csv, DataFrame
 from psqlutil.connection_information import ConnectioinInfromation
 from psqlutil.psql import Psql
 from psqlutil.committing import Committing
+from querycreator import InsertIntoQureryCreator
 
 class InsertingData(Psql):
     DIRPATH = "psqlutil/data"
@@ -41,6 +42,9 @@ class InsertingData(Psql):
     def commit(self) -> None:
         Committing(self.__info, self.__querys).commit()
 
+    def __get_query(self, table_name: str, row: dict):
+        return InsertIntoQureryCreator(table_name, row).get_query()
+
     def __get_querys_from_csv(self, filepath: Path) -> str:
         try:
             df:DataFrame = read_csv(filepath, engine="python", encoding="cp932", dtype=str).fillna("")
@@ -57,7 +61,6 @@ class InsertingData(Psql):
         for f in filepaths:
             print(f"data inserting from {f.name}")
             querys = self.__get_querys_from_csv(f)
-        
         return InsertingData(self.__info, self.__querys + querys)
             
             

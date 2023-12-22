@@ -88,10 +88,6 @@ class TableCreator(Psql):
         table_name = filepath.stem
         return self.__get_table_create_query(table_name, df)
     
-    def __get_querys_from_csvfiles(self) -> list[str]:
-        filepaths = self.__get_filepahs_csv()
-        if len(filepaths) == 0 : raise FileNotFoundError(f"{self.DIRNAME_TABLE}内にファイルがありません。") 
-        return list(map(self.__get_query_from_csv, filepaths))
     
     def __get_filepahs_csv(self) -> list[Path]:
         return [f for f in Path(self.DIRNAME_TABLE).glob("*.csv") if f.is_file()]
@@ -141,10 +137,11 @@ class TableCreator(Psql):
 
     def set_parent_from_csv(self) -> TableCreator:
         filepaths = self.__get_filepahs_csv()
+        querys = []
         for filepath in filepaths:
             print(filepath.name)
-            query = self.__get_query_from_csv(filepath)
-        return TableCreator(self.__info, [query])
+            querys.append(self.__get_query_from_csv(filepath))
+        return TableCreator(self.__info, querys=querys)
     
     def set_child_table_from_csv(self) -> TableCreator:
         filepath = Path(self.CHILD_TABLE_PATH)
@@ -160,7 +157,7 @@ class TableCreator(Psql):
             querys.append(
                 f"CREATE TABLE IF NOT EXISTS {schema}.{child} () INHERITS ({schema}.{parent});"
                 )
-        return TableCreator(self.__info, querys)
+        return TableCreator(self.__info, querys=querys)
         
             
             

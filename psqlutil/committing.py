@@ -53,6 +53,8 @@ class Committing(Psql):
             except Exception as ex:
                 print(f"{query}問題があります。")
                 raise ex
+            else:
+                print(query)
             
         try:
             conn.commit()
