@@ -17,12 +17,12 @@ class Writer(Psql):
     # @override
     def __add__(self,obj: Writer) -> Writer:
         if not isinstance(obj, Writer): raise TypeError()
-        querys = obj.to_querys() + self.__querys()
+        querys = obj.to_querys() + self.__querys
         return Writer(self.__info , querys)
     
     # @override
     def set_querys(self,querys :list[str]) -> Writer:
-        querys = querys + self.__querys()
+        querys = querys + self.__querys
         return Writer(self.__info , querys)
     
     # @override

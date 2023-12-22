@@ -17,12 +17,12 @@ class Creator(Psql):
     # @override
     def __add__(self,obj: Creator) -> Creator:
         if not isinstance(obj, Creator): raise TypeError()
-        querys = obj.to_querys() + self.__querys()
+        querys = obj.to_querys() + self.__querys
         return Creator(self.__info , querys)
     
     # @override
     def set_querys(self,querys :list[str]) -> Creator:
-        querys = querys + self.__querys()
+        querys = querys + self.__querys
         return Creator(self.__info , querys)
     
     # @override

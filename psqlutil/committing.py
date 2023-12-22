@@ -14,12 +14,12 @@ class Committing(Psql):
     # @override
     def __add__(self,obj: Committing) -> Committing:
         if not isinstance(obj, Committing): raise TypeError()
-        querys = obj.to_querys() + self.__querys()
+        querys = obj.to_querys() + self.__querys
         return Committing(self.__info , querys)
     
     # @override
     def set_querys(self,querys :list[str]) -> Committing:
-        querys = querys + self.__querys()
+        querys = querys + self.__querys
         return Committing(self.__info , querys)
 
     # @override

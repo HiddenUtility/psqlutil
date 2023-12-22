@@ -20,12 +20,12 @@ class InsertingData(Psql):
     # @override
     def __add__(self,obj: InsertingData) -> InsertingData:
         if not isinstance(obj, InsertingData): raise TypeError()
-        querys = obj.to_querys() + self.__querys()
+        querys = obj.to_querys() + self.__querys
         return InsertingData(self.__info , querys)
     
     # @override
     def set_querys(self,querys :list[str]) -> InsertingData:
-        querys = querys + self.__querys()
+        querys = querys + self.__querys
         return InsertingData(self.__info , querys)
     
     # @override

@@ -17,12 +17,12 @@ class Editor(Psql):
     # @override
     def __add__(self,obj: Editor) -> Editor:
         if not isinstance(obj, Editor): raise TypeError()
-        querys = obj.to_querys() + self.__querys()
+        querys = obj.to_querys() + self.__querys
         return Editor(self.__info , querys)
     
     # @override
     def set_querys(self,querys :list[str]) -> Editor:
-        querys = querys + self.__querys()
+        querys = querys + self.__querys
         return Editor(self.__info , querys)
     
     # @override

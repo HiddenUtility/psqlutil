@@ -21,14 +21,19 @@ class SchemaCreator(Psql):
     # @override
     def __add__(self,obj: SchemaCreator) -> SchemaCreator:
         if not isinstance(obj, SchemaCreator): raise TypeError()
-        querys = obj.to_querys() + self.__querys()
+        querys = obj.to_querys() + self.__querys
         return SchemaCreator(self.__info , querys)
     
     # @override
     def set_querys(self,querys :list[str]) -> SchemaCreator:
-        querys = querys + self.__querys()
+        querys = self.__querys + querys
         return SchemaCreator(self.__info , querys)
     
+    # @override
+    def set_query(self,query :str) -> SchemaCreator:
+        querys = self.__querys + [query]
+        return SchemaCreator(self.__info , querys)
+
     # @override
     def to_querys(self):
         return self.__querys

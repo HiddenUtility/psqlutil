@@ -17,12 +17,12 @@ class Updater(Psql):
     # @override
     def __add__(self,obj: Updater) -> Updater:
         if not isinstance(obj, Updater): raise TypeError()
-        querys = obj.to_querys() + self.__querys()
+        querys = obj.to_querys() + self.__querys
         return Updater(self.__info , querys)
     
     # @override
     def set_querys(self,querys :list[str]) -> Updater:
-        querys = querys + self.__querys()
+        querys = querys + self.__querys
         return Updater(self.__info , querys)
     
     # @override

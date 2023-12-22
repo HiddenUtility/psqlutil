@@ -32,14 +32,19 @@ class TableCreator(Psql):
     # @override
     def __add__(self,obj: TableCreator) -> TableCreator:
         if not isinstance(obj, TableCreator): raise TypeError()
-        querys = obj.to_querys() + self.__querys()
+        querys = obj.to_querys() + self.__querys
         return TableCreator(self.__info , querys)
     
     # @override
     def set_querys(self,querys :list[str]) -> TableCreator:
-        querys = querys + self.__querys()
+        querys = querys + self.__querys
         return TableCreator(self.__info , querys)
     
+    # @override
+    def set_query(self,query :str) -> TableCreator:
+        querys = self.__querys + [query]
+        return TableCreator(self.__info , querys)
+
     # @override
     def to_querys(self):
         return self.__querys
