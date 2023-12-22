@@ -31,6 +31,11 @@ class InsertingData(Psql):
     # @override
     def to_querys(self):
         return self.__querys
+    
+    # @override
+    def set_query(self,query :str) -> InsertingData:
+        querys = self.__querys + [query]
+        return InsertingData(self.__info , querys)
 
     # @override
     def commit(self) -> None:

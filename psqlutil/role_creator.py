@@ -32,6 +32,11 @@ class RoleCreator(Psql):
         return RoleCreator(self.__info , querys)
     
     # @override
+    def set_query(self,query :str) -> RoleCreator:
+        querys = self.__querys + [query]
+        return RoleCreator(self.__info , querys)
+
+    # @override
     def to_querys(self):
         return self.__querys
 

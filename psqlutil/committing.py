@@ -27,6 +27,12 @@ class Committing(Psql):
         return self.__querys
     
     # @override
+    def set_query(self,query :str) -> Committing:
+        querys = self.__querys + [query]
+        return Committing(self.__info , querys)
+
+    
+    # @override
     def commit(self) -> None:
         if len(self.__querys) == 0: raise Exception("queryがセットされていません。")
         try:
