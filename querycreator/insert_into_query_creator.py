@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Oct 27 14:17:14 2023
-
-@author: nanik
-"""
 from __future__ import annotations
 from querycreator.query_creator import QueryCreator
 from querycreator.table_query_creator import TableQueryCreator

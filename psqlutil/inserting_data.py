@@ -63,6 +63,3 @@ class InsertingData(Psql):
             querys = self.__get_querys_from_csv(f)
         return InsertingData(self.__info, self.__querys + querys)
             
-            
-        
-        

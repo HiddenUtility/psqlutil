@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Sep  1 17:52:15 2023
-
-@author: nanik
-"""
-
 from psqlutil.connection_information import ConnectioinInfromation
 from psqlutil.schema_creator import SchemaCreator
 from psqlutil.table_creator import TableCreator

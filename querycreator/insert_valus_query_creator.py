@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Oct 27 13:43:12 2023
-
-@author: nanik
-"""
-
 from querycreator.query_creator import QueryCreator
 
 class InsertValuesQureryCreator(QueryCreator):
@@ -22,11 +16,8 @@ class InsertValuesQureryCreator(QueryCreator):
         for k, v in data.items():
             cols.append(k)
             words.append(f"'{v}'")
-
         return f"({', '.join(cols)}) VALUES ({', '.join(words)})"
     
     @property
     def query(self):
         return self.__query
-
-
