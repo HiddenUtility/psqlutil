@@ -6,9 +6,9 @@ Created on Fri Oct 27 13:25:21 2023
 """
 
 
-from abc import ABCMeta, abstractmethod, abstractproperty
+from abc import ABC, abstractmethod, abstractproperty
 
-class QueryCreator(metaclass=ABCMeta):
+class QueryCreator(ABC):
     __query: str
 
     

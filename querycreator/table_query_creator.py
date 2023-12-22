@@ -6,9 +6,9 @@ Created on Fri Oct 27 13:25:21 2023
 """
 
 
-from abc import ABCMeta, abstractproperty
+from abc import ABC, abstractproperty
 
-class TableQueryCreator(metaclass=ABCMeta):
+class TableQueryCreator(ABC):
     __table_name: str
 
     

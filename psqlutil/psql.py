@@ -1,13 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Sep  1 17:49:58 2023
-
-@author: nanik
-"""
 from __future__ import annotations
-from abc import ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
 
-class Psql(metaclass=ABCMeta):
+class Psql(ABC):
     @abstractmethod
     def __add__(self):...
     @abstractmethod
