@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Oct  6 05:27:39 2023
 
-@author: nanik
-"""
 from __future__ import annotations
 from psqlutil.psql import Psql
 import psycopg2
