@@ -5,7 +5,7 @@ Created on Fri Oct 27 13:26:21 2023
 @author: nanik
 """
 
-from querycreator.query_creator import QueryCreator
+from psqlutil.querycreator.query_creator import QueryCreator
 
 class WhereQureryCreator(QueryCreator):
     __query: str

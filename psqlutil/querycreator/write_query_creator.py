@@ -6,12 +6,12 @@ Created on Fri Nov  3 19:06:17 2023
 """
 
 from __future__ import annotations
-from querycreator.query_creator import QueryCreator
-from querycreator.table_query_creator import TableQueryCreator
+from psqlutil.querycreator.query_creator import QueryCreator
+from psqlutil.querycreator.table_query_creator import TableQueryCreator
 
 
-from querycreator.delete_query_creator import DeleteQureryCreator
-from querycreator.insert_into_query_creator import InsertIntoQureryCreator
+from psqlutil.querycreator.delete_query_creator import DeleteQureryCreator
+from psqlutil.querycreator.insert_into_query_creator import InsertIntoQureryCreator
 
 class WriteQureryCreator(QueryCreator, TableQueryCreator):
     __table_name: str

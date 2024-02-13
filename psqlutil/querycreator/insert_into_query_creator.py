@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
-from querycreator.query_creator import QueryCreator
-from querycreator.table_query_creator import TableQueryCreator
-from querycreator.insert_valus_query_creator import InsertValuesQureryCreator
+from psqlutil.querycreator.query_creator import QueryCreator
+from psqlutil.querycreator.table_query_creator import TableQueryCreator
+from psqlutil.querycreator.insert_valus_query_creator import InsertValuesQureryCreator
 
 class InsertIntoQureryCreator(QueryCreator, TableQueryCreator):
     __table_name: str

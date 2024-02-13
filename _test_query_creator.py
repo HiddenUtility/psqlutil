@@ -8,9 +8,9 @@ Created on Fri Oct 27 13:24:07 2023
 from init import init
 
 # //P
-from querycreator.where_query_creator import WhereQureryCreator
-from querycreator.insert_valus_query_creator import InsertValuesQureryCreator
-from querycreator.set_valus_query_creator import SetValuesQureryCreator
+from psqlutil.querycreator.where_query_creator import WhereQureryCreator
+from psqlutil.querycreator.insert_valus_query_creator import InsertValuesQureryCreator
+from psqlutil.querycreator.set_valus_query_creator import SetValuesQureryCreator
 # //Public Classs
 from querycreator import SelectQureryCreator
 from querycreator import DeleteQureryCreator

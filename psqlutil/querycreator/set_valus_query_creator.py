@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
-from querycreator.query_creator import QueryCreator
+"""
+Created on Fri Oct 27 13:50:41 2023
 
-class InsertValuesQureryCreator(QueryCreator):
+@author: nanik
+"""
+
+from psqlutil.querycreator.query_creator import QueryCreator
+
+class SetValuesQureryCreator(QueryCreator):
     __query: str
     def __init__(self, data: dict[str,str]={}):
         self.__query = self.get_query(data)
@@ -11,13 +17,12 @@ class InsertValuesQureryCreator(QueryCreator):
     
     def get_query(self, data: dict[str,str]={}) -> str:
         if len(data) == 0 : return ""
-        cols = []
-        words = []
-        for k, v in data.items():
-            cols.append(k)
-            words.append(f"'{v}'")
-        return f"({', '.join(cols)}) VALUES ({', '.join(words)})"
-    
+        values = [f"{k} = '{v}'" for k, v in data.items()]
+        return f"SET {', '.join(values)} "
+
     @property
     def query(self):
         return self.__query
+
+
+
