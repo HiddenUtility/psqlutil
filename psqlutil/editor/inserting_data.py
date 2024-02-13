@@ -6,7 +6,7 @@ from pandas import read_csv, DataFrame
 from psqlutil.connection_information import ConnectioinInfromation
 from psqlutil.psql import Psql
 from psqlutil.committing import Committing
-from querycreator import InsertIntoQureryCreator
+from psqlutil.querycreator.insert_into_query_creator import InsertIntoQureryCreator
 
 class InsertingData(Psql):
     DIRPATH = "psqlutil/data"
